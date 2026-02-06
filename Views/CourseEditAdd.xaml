@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:C971_Mobile_App_PA"
+             x:Class="C971_Mobile_App_PA.Views.CourseEditAdd"
+             Title="Course Details">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="0,0,0,20">
+            <controls:HeaderControl />
+
+            <Label Text="Course Details" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black"/>
+
+            <VerticalStackLayout Padding="20" Spacing="10">
+
+                <Label Text="Course Title" FontAttributes="Bold"/>
+                <Entry Text="{Binding CourseTitle}" Placeholder="e.g., Mobile App Development" />
+
+                <Label Text="Course Status" FontAttributes="Bold"/>
+                <Picker SelectedItem="{Binding CourseStatus}" Title="Select Status">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>In Progress</x:String>
+                            <x:String>Completed</x:String>
+                            <x:String>Dropped</x:String>
+                            <x:String>Plan to Take</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Label Text="Instructor Name" FontAttributes="Bold"/>
+                <Entry Text="{Binding InstructorName}" Placeholder="Dr. Smith" />
+
+                <Label Text="Instructor Phone" FontAttributes="Bold"/>
+                <Entry Text="{Binding InstructorPhone}" Keyboard="Telephone" Placeholder="555-123-4567" />
+
+                <Label Text="Instructor Email" FontAttributes="Bold"/>
+                <Entry Text="{Binding InstructorEmail}" Keyboard="Email" Placeholder="instructor@wgu.edu" />
+
+                <Label Text="Start Date" FontAttributes="Bold"/>
+                <DatePicker Date="{Binding StartDate}" />
+
+                <Label Text="End Date" FontAttributes="Bold"/>
+                <DatePicker Date="{Binding EndDate}" />
+
+                <Label Text="Enable Notifications" FontAttributes="Bold"/>
+                <Switch x:Name="NotificationSwitch" />
+
+                <Label Text="Notes" FontAttributes="Bold"/>
+                <Editor Text="{Binding CourseNotes}" HeightRequest="100" Placeholder="Enter course notes here..." />
+
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="20" Margin="20,0">
+                <Button Text="Save" BackgroundColor="#3949ab" TextColor="White" Clicked="OnSaveClicked" WidthRequest="120" Grid.Column="0"/>
+                <Button Text="Cancel" BackgroundColor="#D32F2F" TextColor="White" Clicked="OnCancelClicked" WidthRequest="120" Grid.Column="1"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

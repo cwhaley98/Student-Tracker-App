@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:C971_Mobile_App_PA"
+             x:Class="C971_Mobile_App_PA.Views.CourseAssessments"
+             Title="Course Assessments">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="0,0,0,20">
+            <controls:HeaderControl />
+
+            <Label x:Name="CourseTitleLabel" 
+                   FontSize="22" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   LineBreakMode="WordWrap"
+                   TextColor="Black"
+                   Margin="20,0,20,10"/>
+
+            <CollectionView x:Name="AssessmentsCollection" Margin="20,0" HeightRequest="400">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="#D3D3D3" StrokeThickness="1" Margin="0,0,0,15" Padding="10">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="5"/>
+                            </Border.StrokeShape>
+
+                            <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="15">
+
+                                <Image Grid.Column="0" 
+                                       HeightRequest="40" 
+                                       WidthRequest="40" 
+                                       VerticalOptions="Center">
+                                    <Image.Triggers>
+                                        <DataTrigger TargetType="Image" 
+                                                     Binding="{Binding AssessmentType}" 
+                                                     Value="Performance">
+                                            <Setter Property="Source" Value="performance.png" />
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Image" 
+                                                     Binding="{Binding AssessmentType}" 
+                                                     Value="Objective">
+                                            <Setter Property="Source" Value="objective.png" />
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+
+                                <Label Grid.Column="1" 
+                                       Text="{Binding AssessmentTitle}" 
+                                       FontAttributes="Bold" 
+                                       FontSize="16" 
+                                       TextColor="Black" 
+                                       VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnAssessmentSelected" CommandParameter="{Binding .}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <ImageButton Grid.Column="2" Source="edit.png" HeightRequest="20" WidthRequest="20" 
+                                             Padding="5" Clicked="OnEditClicked" CommandParameter="{Binding .}"/>
+
+                                <ImageButton Grid.Column="3" Source="delete.png" HeightRequest="20" WidthRequest="20" 
+                                             Padding="5" Clicked="OnDeleteClicked" CommandParameter="{Binding .}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="20,10">
+                <Button Text="Return to Course" 
+                        Grid.Column="0"
+                        BackgroundColor="White" 
+                        TextColor="Black" 
+                        BorderColor="Black" 
+                        BorderWidth="1"
+                        CornerRadius="20"
+                        Clicked="OnReturnClicked"/>
+
+                <Button Text="Add Assessment" 
+                        Grid.Column="1"
+                        BackgroundColor="#3949ab" 
+                        TextColor="White" 
+                        CornerRadius="20"
+                        Clicked="OnAddClicked"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

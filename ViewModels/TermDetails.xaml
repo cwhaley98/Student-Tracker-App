@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:C971_Mobile_App_PA"
+             x:Class="C971_Mobile_App_PA.ViewModels.TermDetails"
+             Title="Term Details">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="0,0,0,20">
+
+            <Border x:Name="SuccessBanner"
+                    BackgroundColor="#D4EDDA"
+                    Stroke="#C3E6CB"
+                    StrokeThickness="1"
+                    HeightRequest="50"
+                    Margin="20,10,20,0"
+                    Padding="10"
+                    IsVisible="False">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Label x:Name="SuccessLabel"
+                       Text="Action Successful"
+                       TextColor="#155724"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Border>
+
+            <controls:HeaderControl />
+
+            <VerticalStackLayout Spacing="5" Padding="20,0">
+                <Label Text="Term Details" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black"/>
+
+                <Border Stroke="#D3D3D3" StrokeThickness="1" Padding="15" Margin="0,10">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="5">
+                        <Label x:Name="TermTitleLabel" FontSize="20" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center"/>
+                        <Label x:Name="TermDateLabel" FontSize="16" TextColor="Gray" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*, Auto" Padding="20,10,20,0">
+                <Label x:Name="CoursesHeaderLabel" Text="Courses (0)" FontSize="18" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center"/>
+                <Button Text="Add Course" 
+                        FontSize="12" 
+                        HeightRequest="35" 
+                        CornerRadius="15" 
+                        BackgroundColor="#3949ab" 
+                        TextColor="White"
+                        Grid.Column="1"
+                        Clicked="OnAddCourseClicked"/>
+            </Grid>
+
+            <CollectionView x:Name="CoursesCollection" Margin="20,0" HeightRequest="300">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="#D3D3D3" StrokeThickness="1" Margin="0,0,0,15" Padding="15">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10"/>
+                            </Border.StrokeShape>
+
+                            <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="15">
+                                <VerticalStackLayout VerticalOptions="Center">
+                                    <Label Text="{Binding CourseTitle}" FontAttributes="Bold" FontSize="16" TextColor="Black">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnCourseSelected"
+                                                                  CommandParameter="{Binding .}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Label Text="{Binding CourseStatus}" FontSize="12" TextColor="Gray"/>
+                                </VerticalStackLayout>
+
+                                <ImageButton Grid.Column="1" Source="edit.png" HeightRequest="20" WidthRequest="20" 
+                                             Padding="5" Clicked="OnEditCourseClicked" CommandParameter="{Binding .}"/>
+
+                                <ImageButton Grid.Column="2" Source="delete.png" HeightRequest="20" WidthRequest="20" 
+                                             Padding="5" Clicked="OnDeleteCourseClicked" CommandParameter="{Binding .}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Back to Terms" 
+                    Margin="20,10" 
+                    BackgroundColor="White" 
+                    TextColor="Black" 
+                    BorderColor="Gray" 
+                    BorderWidth="1"
+                    Clicked="OnBackClicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

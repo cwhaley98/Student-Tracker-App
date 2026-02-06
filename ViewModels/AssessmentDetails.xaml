@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:C971_Mobile_App_PA"
+             x:Class="C971_Mobile_App_PA.ViewModels.AssessmentDetails"
+             Title="Assessment Details">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="0,0,0,20">
+            <controls:HeaderControl />
+
+            <Border Stroke="Black" StrokeThickness="2" Margin="20,10" Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0"/>
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="Auto, *">
+                    <Image Grid.Column="0" 
+                           HeightRequest="50" 
+                           WidthRequest="50" 
+                           VerticalOptions="Center">
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image" Binding="{Binding AssessmentType}" Value="Performance">
+                                <Setter Property="Source" Value="performance.png" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Image" Binding="{Binding AssessmentType}" Value="Objective">
+                                <Setter Property="Source" Value="objective.png" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Label Grid.Column="1" Text="{Binding AssessmentTitle}" FontSize="20" 
+                           VerticalOptions="Center" Margin="15,0,0,0" TextColor="Black"/>
+                </Grid>
+            </Border>
+
+            <VerticalStackLayout Padding="20,0" Spacing="5">
+                <Label Text="Assessment Details" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                <Border Stroke="Black" StrokeThickness="2" Padding="15">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="5"/>
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="{Binding AssessmentTitle, StringFormat='Assessment Title: {0}'}" TextColor="Black"/>
+                        <Label Text="{Binding AssessmentType, StringFormat='Assessment Type: {0}'}" TextColor="Black"/>
+                        <Label Text="{Binding StartDate, StringFormat='Start Date: {0:MM/dd/yyyy}'}" TextColor="Black"/>
+                        <Label Text="{Binding EndDate, StringFormat='End Date: {0:MM/dd/yyyy}'}" TextColor="Black"/>
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Notifications Enabled?" TextColor="Black" FontAttributes="Bold"/>
+                            <Label x:Name="NotifStatusLabel" TextColor="Black"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <Button Text="Back" 
+                    Margin="20,20" 
+                    BackgroundColor="White" 
+                    TextColor="Black" 
+                    BorderColor="Black" 
+                    BorderWidth="2" 
+                    CornerRadius="20"
+                    Clicked="OnBackClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

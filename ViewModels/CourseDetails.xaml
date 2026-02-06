@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:C971_Mobile_App_PA"
+             x:Class="C971_Mobile_App_PA.ViewModels.CourseDetails"
+             Title="Course Details">
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="0,0,0,30">
+
+            <controls:HeaderControl />
+
+            <Label Text="{Binding CourseTitle}" 
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   TextColor="Black"
+                   Margin="0,0,0,10"/>
+
+            <VerticalStackLayout Padding="20,0" Spacing="5">
+                <Label Text="Course Details" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                <Border Stroke="Black" StrokeThickness="2" Padding="15">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="5"/>
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="{Binding CourseTitle, StringFormat='Course Name: {0}'}" TextColor="Black"/>
+                        <Label Text="{Binding CourseStatus, StringFormat='Course Status: {0}'}" TextColor="Black"/>
+                        <Label Text="{Binding StartDate, StringFormat='Start Date: {0:MM/dd/yyyy}'}" TextColor="Black"/>
+                        <Label Text="{Binding EndDate, StringFormat='End Date: {0:MM/dd/yyyy}'}" TextColor="Black"/>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Padding="20,0" Spacing="5">
+                <Label Text="Instructor Details" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                <Border Stroke="Black" StrokeThickness="2" Padding="15">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="5"/>
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="{Binding InstructorName, StringFormat='Instructor Name: {0}'}" TextColor="Black"/>
+                        <Label Text="{Binding InstructorPhone, StringFormat='Instructor Phone: {0}'}" TextColor="Black"/>
+                        <Label Text="{Binding InstructorEmail, StringFormat='Instructor Email: {0}'}" TextColor="Black"/>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Padding="20,0" Spacing="5">
+                <Label Text="Additional Details" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                <Border Stroke="Black" StrokeThickness="2" Padding="15">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="5"/>
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="8">
+                        <Label x:Name="NotificationLabel" Text="Notifications Enabled? " TextColor="Black"/>
+
+                        <Label Text="Course Notes:" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="{Binding CourseNotes}" TextColor="Black" LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Padding="20,10" Spacing="15">
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                    <Button Text="Share Notes" 
+                            Grid.Column="0"
+                            BackgroundColor="#3949ab" 
+                            TextColor="White" 
+                            BorderColor="Transparent" 
+                            BorderWidth="2"
+                            CornerRadius="20"
+                            Clicked="OnShareNotesClicked"/>
+
+                    <Button Text="Course Assessment" 
+                            Grid.Column="1"
+                            BackgroundColor="#3949ab" 
+                            TextColor="White" 
+                            BorderColor="Transparent" 
+                            BorderWidth="2"
+                            CornerRadius="20"
+                            Clicked="OnAssessmentClicked"/>
+                </Grid>
+
+                <Button Text="Return to Courses Overview" 
+                        BackgroundColor="#3949ab" 
+                        TextColor="White" 
+                        BorderColor="Transparent"
+                        BorderWidth="2"
+                        CornerRadius="20"
+                        HorizontalOptions="Center"
+                        WidthRequest="250"
+                        Clicked="OnReturnClicked"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
