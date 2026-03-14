@@ -1,6 +1,6 @@
-using C971_Mobile_App_PA.Schemas;
+using Student_Tracker_App.Schemas;
 
-namespace C971_Mobile_App_PA.ViewModels;
+namespace Student_Tracker_App.ViewModels;
 
 public partial class AssessmentDetails : ContentPage
 {

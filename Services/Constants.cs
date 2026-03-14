@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace C971_Mobile_App_PA.Services
+namespace Student_Tracker_App.Services
 {
     public static class Constants
     {

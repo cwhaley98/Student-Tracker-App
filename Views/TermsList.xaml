@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              
-             xmlns:controls="clr-namespace:C971_Mobile_App_PA"
+             xmlns:controls="clr-namespace:Student_Tracker_App"
              
-             x:Class="C971_Mobile_App_PA.Views.TermsList"
+             x:Class="Student_Tracker_App.Views.TermsList"
              Title="Terms List">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add Term" 

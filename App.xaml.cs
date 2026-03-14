@@ -1,6 +1,6 @@
-﻿using C971_Mobile_App_PA.Services;
+﻿using Student_Tracker_App.Services;
 
-namespace C971_Mobile_App_PA
+namespace Student_Tracker_App
 {
     public partial class App : Application
     {

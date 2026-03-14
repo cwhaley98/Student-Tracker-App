@@ -1,12 +1,13 @@
-﻿using C971_Mobile_App_PA.Schemas;
+﻿using Student_Tracker_App.Schemas;
 using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
-namespace C971_Mobile_App_PA.Services
+namespace Student_Tracker_App.Services
 {
     public class DatabaseServices
     {
@@ -21,10 +22,75 @@ namespace C971_Mobile_App_PA.Services
         private async Task CreateTableAsync()
         {
             // Create Terms, Courses, and Assessments table if they don't exist
+            _database.CreateTableAsync<User>().Wait();
             _database.CreateTableAsync<Term>().Wait();
             _database.CreateTableAsync<Course>().Wait();
             _database.CreateTableAsync<Assessment>().Wait();
         }
+
+
+        #region User Data
+        // User Account Verification
+        /// <summary>
+        /// Checks if a users account exists in the database
+        /// </summary>
+        public async Task<bool> CheckUserExistsAsync(string username)
+        {
+            var user = await _database.Table<User>()
+                .Where(u => u.Username == username)
+                .FirstOrDefaultAsync();
+            return user != null; // Returns true if the user is found, false if not
+        }
+
+        // User Registration Method
+        /// <summary>
+        /// Registers a new user. Returns false if the username already exists.
+        /// </summary>
+        public async Task<bool> RegisterUserAsync(string username, string password)
+        {
+            // Check if the username already exists
+            var existingUser = await _database.Table<User>()
+                .Where(u => u.Username == username)
+                .FirstOrDefaultAsync();
+            if (existingUser != null) 
+            {
+                return false; // Username already exists
+            }
+
+            // Create user with hashed password
+
+            var newUser = new User
+            {
+                Username = username,
+                PasswordHash = SecurityHelper.HashPassword(password)
+            };
+
+            await _database.InsertAsync(newUser);
+            return true;
+        }
+
+        // User Login Method
+        /// <summary>
+        /// Validates a user's login attempt against the hashed password.
+        /// </summary>
+        
+        public async Task<bool> ValidateLoginAsync(string username, string password)
+        {
+            // Fetch the user by username
+            var user = await _database.Table<User>()
+                .Where(u => u.Username == username)
+                .FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return false; // User not found
+            }
+
+            // Hash the input password and compare with stored hash
+            string inputHash = SecurityHelper.HashPassword(password);
+            return user.PasswordHash == inputHash;
+        }
+
+        #endregion
 
         #region Term Data
 

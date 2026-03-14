@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace C971_Mobile_App_PA
+namespace Student_Tracker_App
 {
     internal class Program : MauiApplication
     {

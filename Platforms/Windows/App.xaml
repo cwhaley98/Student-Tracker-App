@@ -1,8 +1,8 @@
 ﻿<maui:MauiWinUIApplication
-    x:Class="C971_Mobile_App_PA.WinUI.App"
+    x:Class="Student_Tracker_App.WinUI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:maui="using:Microsoft.Maui"
-    xmlns:local="using:C971_Mobile_App_PA.WinUI">
+    xmlns:local="using:Student_Tracker_App.WinUI">
 
 </maui:MauiWinUIApplication>

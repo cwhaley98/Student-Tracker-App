@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="C971_Mobile_App_PA.AppShell"
+    x:Class="Student_Tracker_App.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:C971_Mobile_App_PA"
-    Title="C971_Mobile_App_PA">
+    xmlns:local="clr-namespace:Student_Tracker_App"
+    Title="Student_Tracker_App">
 
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"

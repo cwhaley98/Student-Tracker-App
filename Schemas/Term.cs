@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace C971_Mobile_App_PA.Schemas
+namespace Student_Tracker_App.Schemas
 {
     public class Term
     {

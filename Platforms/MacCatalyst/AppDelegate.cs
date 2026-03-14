@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace C971_Mobile_App_PA
+namespace Student_Tracker_App
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

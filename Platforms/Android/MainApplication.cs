@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace C971_Mobile_App_PA
+namespace Student_Tracker_App
 {
     [Application]
     public class MainApplication : MauiApplication

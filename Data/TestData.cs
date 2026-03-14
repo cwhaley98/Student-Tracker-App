@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using C971_Mobile_App_PA.Schemas;
-using C971_Mobile_App_PA.Services;
+using Student_Tracker_App.Schemas;
+using Student_Tracker_App.Services;
 
-namespace C971_Mobile_App_PA.Data
+namespace Student_Tracker_App.Data
 {
     public class TestData
     {

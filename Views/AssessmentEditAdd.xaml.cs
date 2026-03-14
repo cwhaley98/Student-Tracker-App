@@ -1,7 +1,7 @@
-using C971_Mobile_App_PA.Schemas;
+using Student_Tracker_App.Schemas;
 using Plugin.LocalNotification;
 
-namespace C971_Mobile_App_PA.Views;
+namespace Student_Tracker_App.Views;
 
 public partial class AssessmentEditAdd : ContentPage
 {

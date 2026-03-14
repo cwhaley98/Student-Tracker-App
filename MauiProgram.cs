@@ -2,7 +2,7 @@
 using Plugin.LocalNotification;
 using CommunityToolkit.Maui;
 
-namespace C971_Mobile_App_PA
+namespace Student_Tracker_App
 {
     public static class MauiProgram
     {

@@ -1,4 +1,4 @@
-﻿namespace C971_Mobile_App_PA
+﻿namespace Student_Tracker_App
 {
     public partial class AppShell : Shell
     {

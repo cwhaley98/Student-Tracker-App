@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:C971_Mobile_App_PA"
-             x:Class="C971_Mobile_App_PA.ViewModels.CourseDetails"
+             xmlns:controls="clr-namespace:Student_Tracker_App"
+             x:Class="Student_Tracker_App.ViewModels.CourseDetails"
              Title="Course Details">
     <ScrollView>
         <VerticalStackLayout Spacing="15" Padding="0,0,0,30">

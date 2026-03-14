@@ -1,7 +1,7 @@
-using C971_Mobile_App_PA.Schemas;
-using C971_Mobile_App_PA.Views;
+using Student_Tracker_App.Schemas;
+using Student_Tracker_App.Views;
 
-namespace C971_Mobile_App_PA.ViewModels;
+namespace Student_Tracker_App.ViewModels;
 
 public partial class TermDetails : ContentPage
 {
