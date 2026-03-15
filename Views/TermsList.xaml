@@ -12,76 +12,123 @@
                      Priority="0" 
                      Order="Primary" />
     </ContentPage.ToolbarItems>
-    <ScrollView>
-        <VerticalStackLayout>
-            <Border x:Name="SuccessBanner"
-                BackgroundColor="#D4EDDA"
-                Stroke="#C3E6CB"
-                StrokeThickness="1"
-                HeightRequest="50"
-                Margin="20,10,20,0"
-                Padding="10"
-                IsVisible="False">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10" />
-                </Border.StrokeShape>
-                <Label x:Name="SuccessLabel"
-                   Text="Action Successful"
-                   TextColor="#155724"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center" />
-            </Border>
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout>
+                <Border x:Name="SuccessBanner"
+                    BackgroundColor="#D4EDDA"
+                    Stroke="#C3E6CB"
+                    StrokeThickness="1"
+                    HeightRequest="50"
+                    Margin="20,10,20,0"
+                    Padding="10"
+                    IsVisible="False">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10" />
+                    </Border.StrokeShape>
+                    <Label x:Name="SuccessLabel"
+                        Text="Action Successful"
+                        TextColor="#155724"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Border>
 
-            <controls:HeaderControl />
+                <controls:HeaderControl />
 
-            <Label Text="Terms List" 
+                <Label Text="Terms List" 
                FontSize="28" 
                FontAttributes="Bold" 
                HorizontalOptions="Center" 
                TextColor="Black" 
                Margin="0,20,0,10" />
 
-            <CollectionView x:Name="TermsCollection" Margin="20,0">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Stroke="Black" StrokeThickness="1" Margin="0,0,0,10" Padding="15">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="10" />
-                            </Border.StrokeShape>
-                            <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="20">
-                                <Label Text="{Binding Path=TermTitle}"
+                <SearchBar x:Name="MainSearchBar"
+                       Placeholder="Search courses or assessments..."
+                       TextChanged="OnSearchBarTextChanged"
+                       CancelButtonColor="Red" />
+
+                <CollectionView x:Name="SearchResultsView"
+                            IsVisible="False"
+                            Margin="20,0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="#3949ab"
+                                StrokeThickness="1"
+                                Margin="0,0,0,10"
+                                Padding="15"
+                                Background="#f8f9fa">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10" />
+                                </Border.StrokeShape>
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Title}"
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       TextColor="Black" />
+                                    <Label Text="{Binding ItemType}"
+                                       FontAttributes="Italic"
+                                       TextColor="#3949ab" />
+                                    <Label Text="{Binding StartDate, StringFormat='Starts: {0:MMM dd, yyyy}'}"
+                                       TextColor="DarkGray" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <CollectionView x:Name="TermsCollection" Margin="20,0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="Black" StrokeThickness="1" Margin="0,0,0,10" Padding="15">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10" />
+                                </Border.StrokeShape>
+                                <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="20">
+                                    <Label Text="{Binding Path=TermTitle}"
                                        VerticalOptions="Center"
                                        HorizontalOptions="Start"
                                        FontAttributes="Bold"
                                        FontSize="18"
                                        TextColor="Black">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer
                                             Tapped="OnTermSelected"
                                             CommandParameter="{Binding Path=.}" />
-                                    </Label.GestureRecognizers>
-                                </Label>
+                                        </Label.GestureRecognizers>
+                                    </Label>
 
-                                <ImageButton Grid.Column="1"
+                                    <ImageButton Grid.Column="1"
                                              Padding="5"
                                              Source="edit.png"
                                              HeightRequest="5"
                                              WidthRequest="5"
                                              Clicked="OnEditClicked"
                                              CommandParameter="{Binding Path=.}" />
-                                <ImageButton Grid.Column="2"
+                                    <ImageButton Grid.Column="2"
                                              Padding="5"
                                              Source="delete.png"
                                              HeightRequest="5"
                                              WidthRequest="5"
                                              Clicked="OnDeleteClicked"
                                              CommandParameter="{Binding Path=.}" />
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </VerticalStackLayout>
-    </ScrollView>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Button Text="View Reports"
+                Clicked="OnViewReportsClicked"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="20,20,20,30"
+                CornerRadius="25"
+                HeightRequest="50"
+                BackgroundColor="#3949ab"
+                TextColor="White"
+                FontAttributes="Bold"
+                Shadow="{Shadow Brush=Black, Offset='2,2', Radius=5, Opacity=0.3}" />
+    </Grid>
 </ContentPage>

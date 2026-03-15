@@ -1,4 +1,5 @@
 ﻿using Student_Tracker_App.Schemas;
+using Student_Tracker_App.Data;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -16,16 +17,19 @@ namespace Student_Tracker_App.Services
         public DatabaseServices(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
-            CreateTableAsync().Wait();
+            Task.Run(async () => await InitializeDatabaseAsync());
         }
 
-        private async Task CreateTableAsync()
+        private async Task InitializeDatabaseAsync()
         {
             // Create Terms, Courses, and Assessments table if they don't exist
-            _database.CreateTableAsync<User>().Wait();
-            _database.CreateTableAsync<Term>().Wait();
-            _database.CreateTableAsync<Course>().Wait();
-            _database.CreateTableAsync<Assessment>().Wait();
+            await _database.CreateTableAsync<User>();
+            await _database.CreateTableAsync<Term>();
+            await _database.CreateTableAsync<Course>();
+            await _database.CreateTableAsync<Assessment>();
+
+            // Seed test data
+            await Data.TestData.GenerateTestDataAsync(_database);
         }
 
 
@@ -222,6 +226,74 @@ namespace Student_Tracker_App.Services
         {
             return _database.DeleteAsync(assessment);
         }
+        #endregion
+
+        #region Search Functionality
+        /// <summary>
+        /// Searches both Courses and Assessments by title and returns a combined list of results
+        /// </summary>
+
+        public async Task<List<SearchResult>> SearchAcademicItemsAsync(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return new List<SearchResult>(); // Return empty list for empty query
+            }
+
+            query = query.ToLower(); // Normalize query for case-insensitive search
+
+            // Grab all courses and filter in memory
+            var allCourses = await _database.Table<Course>().ToListAsync();
+            var matchedCourses = allCourses
+                .Where(c => !string.IsNullOrEmpty(c.CourseTitle) && c.CourseTitle.ToLower().Contains(query))
+                .Select(c => new SearchResult
+                {
+                    Title = c.CourseTitle,
+                    ItemType = "Course",
+                    StartDate = c.StartDate,
+                    EndDate = c.EndDate
+                });
+
+            // Grab all assessments and filter in memory
+            var allAssessments = await _database.Table<Assessment>().ToListAsync();
+            var matchedAssessments = allAssessments
+                .Where(a => !string.IsNullOrEmpty(a.AssessmentTitle) && a.AssessmentTitle.ToLower().Contains(query))
+                .Select(a => new SearchResult
+                {
+                    Title = a.AssessmentTitle,
+                    ItemType = "Assessment",
+                    StartDate = a.StartDate,
+                    EndDate = a.EndDate
+                });
+
+            // Combine both lists and return
+            return matchedCourses.Concat(matchedAssessments).ToList();
+        }
+        #endregion
+
+        #region Reporting
+
+        /// <summary>
+        /// Report: Gets the total count of courses across the entire app and categorizes them by their status (In Progress, Completed, Dropped, Plan to Take)
+        /// </summary>
+        public async Task<List<CourseStatusCount>> GetCourseStatusReportAsync()
+        {
+            // Grab all courses and group by status in memory
+            var allCourses = await _database.Table<Course>().ToListAsync();
+
+            // Use LINQ to group courses by status and count them
+            var report = allCourses
+                .GroupBy(c => string.IsNullOrWhiteSpace(c.CourseStatus) ? "Unassigned" : c.CourseStatus) // Handle null or empty status
+                .Select(group => new CourseStatusCount
+                {
+                    CourseStatus = group.Key,
+                    Count = group.Count()
+                })
+                .OrderByDescending(r => r.Count) //Puts the highest count at the top of the report
+                .ToList();
+            return report;
+        }
+
         #endregion
     }
 }

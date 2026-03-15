@@ -123,4 +123,31 @@ public partial class TermsList : ContentPage
             await DisplayAlert("Error", "Delete failed: " + ex.Message, "OK");
         }
     }
+
+    private async void OnSearchBarTextChanged(object sender, TextChangedEventArgs e)
+    {
+        string query = e.NewTextValue;
+
+        //If search bar is cleared, go back to normal view
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            SearchResultsView.IsVisible = false;
+            TermsCollection.IsVisible = true; //Ensure this matches the name of existing CollectionView
+            return;
+        }
+
+        // Hide the normal list and show the search results view
+        TermsCollection.IsVisible = false; //Ensure this matches the name of existing CollectionView
+        SearchResultsView.IsVisible = true;
+
+        //Fetch the data and bind it to the search results CollectionView
+        var results = await App.Database.SearchAcademicItemsAsync(query);
+        SearchResultsView.ItemsSource = results;
+    }
+
+    private async void OnViewReportsClicked(object sender, EventArgs e)
+    {
+        //Navigate to the Reports Dashboard page
+        await Navigation.PushAsync(new Views.ReportsDashboard());
+    }
 }
