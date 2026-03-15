@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Student_Tracker_App.Views.ReportsDashboard"
+             Title="Reports Dashboard">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Academic Metrics" 
+                   FontSize="28" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   TextColor="Black" 
+                   Margin="0,0,0,10"/>
+
+            <Label Text="Course Status Breakdown" FontSize="20" FontAttributes="Bold" TextColor="Black"/>
+
+            <CollectionView x:Name="StatusReportView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="LightGray" StrokeThickness="1" Margin="0,0,0,10" Padding="15">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label Grid.Column="0" Text="{Binding CourseStatus}" FontSize="18" VerticalOptions="Center" TextColor="Black" />
+                                <Label Grid.Column="1" Text="{Binding Count}" FontSize="22" FontAttributes="Bold" TextColor="#3949ab" VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Border Stroke="#3949ab" StrokeThickness="2" BackgroundColor="#e8eaf6" Padding="15" Margin="0,10,0,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" Text="Grand Total" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" TextColor="Black" />
+                    <Label Grid.Column="1" x:Name="GrandTotalLabel" Text="0" FontSize="24" FontAttributes="Bold" TextColor="#3949ab" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
