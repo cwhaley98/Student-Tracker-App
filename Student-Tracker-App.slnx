@@ -1,6 +1,6 @@
 <Solution>
-  <Project Path="../Student_Tracker_App.Tests/Student_Tracker_App.Tests.csproj" Id="4e65b601-9e42-4d06-b93c-9376339d4ef5" />
   <Project Path="Student-Tracker-App.csproj">
     <Deploy Solution="Debug|*" />
   </Project>
+  <Project Path="Student_Tracker_App.Tests/Student_Tracker_App.Tests.csproj" />
 </Solution>
