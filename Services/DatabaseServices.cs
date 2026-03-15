@@ -14,13 +14,15 @@ namespace Student_Tracker_App.Services
     {
         private SQLiteAsyncConnection _database;
 
-        public DatabaseServices(string dbPath)
+        public Task InitTask { get; private set; }
+
+        public DatabaseServices(string dbPath, bool isTestMode = false)
         {
             _database = new SQLiteAsyncConnection(dbPath);
-            Task.Run(async () => await InitializeDatabaseAsync());
+            InitTask = Task.Run(async () => await InitializeDatabaseAsync(isTestMode));
         }
 
-        private async Task InitializeDatabaseAsync()
+        private async Task InitializeDatabaseAsync(bool isTestMode)
         {
             // Create Terms, Courses, and Assessments table if they don't exist
             await _database.CreateTableAsync<User>();
@@ -28,8 +30,12 @@ namespace Student_Tracker_App.Services
             await _database.CreateTableAsync<Course>();
             await _database.CreateTableAsync<Assessment>();
 
-            // Seed test data
-            await Data.TestData.GenerateTestDataAsync(_database);
+            // Seed test data if we are not in test mode
+            if (!isTestMode)
+            {
+                await Data.TestData.GenerateTestDataAsync(_database);
+            }
+            
         }
 
 

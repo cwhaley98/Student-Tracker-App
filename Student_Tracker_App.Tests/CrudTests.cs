@@ -16,9 +16,12 @@ namespace Student_Tracker_App.Tests
 
         private DatabaseServices GetTestDatabase()
         {
+            // Create a unique temporary database file for each test
             string testDbPath = Path.Combine(Path.GetTempPath(), $"testdb_{Guid.NewGuid()}.db3");
-            return new DatabaseServices(testDbPath);
+            var db = new DatabaseServices(testDbPath, true);
 
+            db.InitTask.Wait(); // Ensure the database is initialized before returning
+            return db;
         }
 
         [Fact]
