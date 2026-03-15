@@ -16,10 +16,24 @@ namespace Student_Tracker_App.Data
         /// </summary>
         public static async Task GenerateTestDataAsync(SQLiteAsyncConnection database)
         {
+            //Create a random number generator
+            Random random = new Random();
+
             // Check if data already exists to prevent duplicating the test data
             int termCount = await database.Table<Term>().CountAsync();
             if (termCount > 0)
                 return;
+
+            //Create a pool of realistic, fake instructor names and contact info
+            var instructors = new[]
+            {
+                new { Name = "Dr. Alan Turing", Phone = "555-010-8432", Email = "aturing@tst.edu" },
+                new { Name = "Prof. Ada Lovelace", Phone = "555-011-9274", Email = "alovelace@tst.edu" },
+                new { Name = "Dr. Grace Hopper", Phone = "555-012-3381", Email = "ghopper@tst.edu" },
+                new { Name = "Prof. John von Neumann", Phone = "555-013-4492", Email = "jvonneumann@tst.edu" },
+                new { Name = "Dr. Margaret Hamilton", Phone = "555-014-5503", Email = "mhamilton@tst.edu" },
+                new { Name = "Prof. Tim Berners-Lee", Phone = "555-015-6614", Email = "tbernerslee@tst.edu" }
+            };
 
             // --- TERM 1: Summer 2026 (4 Courses) ---
             var term1 = new Term { TermTitle = "Summer 2026", TermStart = new DateTime(2026, 6, 1), TermEnd = new DateTime(2026, 8, 31) };
