@@ -61,10 +61,17 @@
             string username = UsernameEntry.Text;
             string password = PasswordEntry.Text;
 
-            // 1. Validation Check
+            // 1. Validation Check for empty fields
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 await DisplayAlert("Error", "Please enter a username and password to create an account.", "OK");
+                return;
+            }
+
+            // Password Validation Check
+            if (!Student_Tracker_App.Services.ValidationHelper.IsValidPassword(password))
+            {
+                await DisplayAlert("Invalid Password", "Password must be at least 6 characters long and include an uppercase letter, a lowercase letter, and a number.", "OK");
                 return;
             }
 

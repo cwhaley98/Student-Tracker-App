@@ -133,9 +133,21 @@ public partial class CourseEditAdd : ContentPage
             await Application.Current.Windows[0].Page.DisplayAlert("Error", "Enter an instructor email", "OK");
             return;
         }
+        // Instructor Email Validation
+        if (!Student_Tracker_App.Services.ValidationHelper.IsValidEmail(_course.InstructorEmail))
+        {
+            await Application.Current.Windows[0].Page.DisplayAlert("Invalid Email", "Please enter a valid email address (e.g., name@domain.com).", "OK");
+            return;
+        }
         if (string.IsNullOrWhiteSpace(_course.InstructorPhone))
         {
             await Application.Current.Windows[0].Page.DisplayAlert("Error", "Enter an instructor phone", "OK");
+            return;
+        }
+        // Instructor Phone Validation
+        if (!Student_Tracker_App.Services.ValidationHelper.IsValidPhoneNumber(_course.InstructorPhone))
+        {
+            await Application.Current.Windows[0].Page.DisplayAlert("Invalid Phone", "Please enter a valid phone number format: 555-555-5555 or (555) 555-5555.", "OK");
             return;
         }
 
