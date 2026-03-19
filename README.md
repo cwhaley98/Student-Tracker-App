@@ -28,7 +28,7 @@ This application was engineered using modern mobile development frameworks and l
 *(Note: This section will be updated shortly with a direct download link once the application is deployed to GitHub Pages!)*
 
 ### Download the App
-1. Navigate to the **[Student Tracker App Release Page](#)** *(Link coming soon)*.
+1. Navigate to the **[Student Tracker App Release Page](https://github.com/cwhaley98/Student-Tracker-App/releases/tag/v1.0)**.
 2. Download the latest `StudentTrackerApp.apk` file to your Android device or emulator.
 3. If prompted, allow your device to "Install from unknown sources."
 4. Open the app, create a secure account, and begin tracking your degree!
