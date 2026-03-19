@@ -25,7 +25,6 @@ This application was engineered using modern mobile development frameworks and l
 * **Additional Libraries:** `Plugin.LocalNotification`
 
 ## 🚀 Installation and Access
-*(Note: This section will be updated shortly with a direct download link once the application is deployed to GitHub Pages!)*
 
 ### Download the App
 1. Navigate to the **[Student Tracker App Release Page](https://github.com/cwhaley98/Student-Tracker-App/releases/tag/v1.0)**.
