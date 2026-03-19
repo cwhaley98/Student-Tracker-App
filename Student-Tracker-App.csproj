@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android</TargetFrameworks>
-		<RuntimeIdentifiers>android-arm64</RuntimeIdentifiers>
+		<TargetFrameworks>net9.0;net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
 
 		<DefaultItemExcludes>$(DefaultItemExcludes);Student_Tracker_App.Tests\**</DefaultItemExcludes>
 
