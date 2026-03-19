@@ -36,7 +36,7 @@ This application was engineered using modern mobile development frameworks and l
 ### Running the Source Code locally
 1. Clone this repository to your local machine:
    `git clone https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git`
-2. Open the solution file (`.sln`) in **Visual Studio 2022**.
+2. Open the solution file (`.sln`) in **Visual Studio 2026**.
 3. Ensure you have the **.NET Multi-platform App UI development** workload installed.
 4. Set your target device to an Android Emulator (API 30+ recommended).
 5. Build and run the project!
